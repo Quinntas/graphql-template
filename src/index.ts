@@ -1,4 +1,4 @@
-import {parse, printSchema} from 'graphql';
+import {parse} from 'graphql';
 import {compileQuery} from 'graphql-jit';
 import {createServer} from 'http';
 import {schema} from './gql';
@@ -46,11 +46,12 @@ const server = createServer((req, res) => {
             res.setHeader('Content-Type', 'application/json');
             res.end(JSON.stringify(result));
         } catch (e) {
+            console.error(e);
             res.statusCode = 500;
             res.setHeader('Content-Type', 'application/json');
             res.end(
                 JSON.stringify({
-                    message: (e as Error).message,
+                    message: 'internal server error',
                 }),
             );
         }
