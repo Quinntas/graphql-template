@@ -1,0 +1,1546 @@
+type MutationReturn {
+  isSuccess: Boolean!
+}
+
+type DealersTableSelectItem {
+  id: Int!
+  pid: String!
+  firstName: String!
+  lastName: String!
+  dealerHasExperience: Boolean!
+  cpf: String!
+  rg: String!
+  brand: String!
+  gender: String!
+  registerStatus: String!
+  rejectionReason: String!
+  antiFraudStatus: String!
+  faceBiometryStatus: String!
+  creditAnalysisPid: String!
+  walletId: String!
+  userId: Int!
+  storeRefCode: String!
+  revScore: Int!
+
+  """Date"""
+  created_at: String!
+
+  """Date"""
+  updated_at: String!
+  User(where: DealersTableUserRelationFilters): DealersTableUserRelation
+}
+
+type DealersTableUserRelation {
+  id: Int!
+  pid: String!
+  email: String!
+  password: String!
+  phone: String!
+
+  """Date"""
+  created_at: String!
+
+  """Date"""
+  updated_at: String!
+}
+
+input DealersTableUserRelationFilters {
+  id: UserIdFilters
+  pid: UserPidFilters
+  email: UserEmailFilters
+  password: UserPasswordFilters
+  phone: UserPhoneFilters
+  created_at: UserCreated_atFilters
+  updated_at: UserUpdated_atFilters
+  OR: [DealersTableUserRelationFiltersOr!]
+}
+
+input UserIdFilters {
+  eq: Int
+  ne: Int
+  lt: Int
+  lte: Int
+  gt: Int
+  gte: Int
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+
+  """Array<undefined>"""
+  inArray: [Int!]
+
+  """Array<undefined>"""
+  notInArray: [Int!]
+  isNull: Boolean
+  isNotNull: Boolean
+  OR: [UserIdfiltersOr!]
+}
+
+input UserIdfiltersOr {
+  eq: Int
+  ne: Int
+  lt: Int
+  lte: Int
+  gt: Int
+  gte: Int
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+
+  """Array<undefined>"""
+  inArray: [Int!]
+
+  """Array<undefined>"""
+  notInArray: [Int!]
+  isNull: Boolean
+  isNotNull: Boolean
+}
+
+input UserPidFilters {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+
+  """Array<undefined>"""
+  inArray: [String!]
+
+  """Array<undefined>"""
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+  OR: [UserPidfiltersOr!]
+}
+
+input UserPidfiltersOr {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+
+  """Array<undefined>"""
+  inArray: [String!]
+
+  """Array<undefined>"""
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+}
+
+input UserEmailFilters {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+
+  """Array<undefined>"""
+  inArray: [String!]
+
+  """Array<undefined>"""
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+  OR: [UserEmailfiltersOr!]
+}
+
+input UserEmailfiltersOr {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+
+  """Array<undefined>"""
+  inArray: [String!]
+
+  """Array<undefined>"""
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+}
+
+input UserPasswordFilters {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+
+  """Array<undefined>"""
+  inArray: [String!]
+
+  """Array<undefined>"""
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+  OR: [UserPasswordfiltersOr!]
+}
+
+input UserPasswordfiltersOr {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+
+  """Array<undefined>"""
+  inArray: [String!]
+
+  """Array<undefined>"""
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+}
+
+input UserPhoneFilters {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+
+  """Array<undefined>"""
+  inArray: [String!]
+
+  """Array<undefined>"""
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+  OR: [UserPhonefiltersOr!]
+}
+
+input UserPhonefiltersOr {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+
+  """Array<undefined>"""
+  inArray: [String!]
+
+  """Array<undefined>"""
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+}
+
+input UserCreated_atFilters {
+  """Date"""
+  eq: String
+
+  """Date"""
+  ne: String
+
+  """Date"""
+  lt: String
+
+  """Date"""
+  lte: String
+
+  """Date"""
+  gt: String
+
+  """Date"""
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+
+  """Array<Date>"""
+  inArray: [String!]
+
+  """Array<Date>"""
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+  OR: [UserCreated_atfiltersOr!]
+}
+
+input UserCreated_atfiltersOr {
+  """Date"""
+  eq: String
+
+  """Date"""
+  ne: String
+
+  """Date"""
+  lt: String
+
+  """Date"""
+  lte: String
+
+  """Date"""
+  gt: String
+
+  """Date"""
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+
+  """Array<Date>"""
+  inArray: [String!]
+
+  """Array<Date>"""
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+}
+
+input UserUpdated_atFilters {
+  """Date"""
+  eq: String
+
+  """Date"""
+  ne: String
+
+  """Date"""
+  lt: String
+
+  """Date"""
+  lte: String
+
+  """Date"""
+  gt: String
+
+  """Date"""
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+
+  """Array<Date>"""
+  inArray: [String!]
+
+  """Array<Date>"""
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+  OR: [UserUpdated_atfiltersOr!]
+}
+
+input UserUpdated_atfiltersOr {
+  """Date"""
+  eq: String
+
+  """Date"""
+  ne: String
+
+  """Date"""
+  lt: String
+
+  """Date"""
+  lte: String
+
+  """Date"""
+  gt: String
+
+  """Date"""
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+
+  """Array<Date>"""
+  inArray: [String!]
+
+  """Array<Date>"""
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+}
+
+input DealersTableUserRelationFiltersOr {
+  id: UserIdFilters
+  pid: UserPidFilters
+  email: UserEmailFilters
+  password: UserPasswordFilters
+  phone: UserPhoneFilters
+  created_at: UserCreated_atFilters
+  updated_at: UserUpdated_atFilters
+}
+
+type UsersTableSelectItem {
+  id: Int!
+  pid: String!
+  email: String!
+  password: String!
+  phone: String!
+
+  """Date"""
+  created_at: String!
+
+  """Date"""
+  updated_at: String!
+}
+
+input DealersTableInsertInput {
+  id: Int!
+  pid: String!
+  firstName: String!
+  lastName: String!
+  dealerHasExperience: Boolean!
+  cpf: String!
+  rg: String!
+  brand: String!
+  gender: String!
+  registerStatus: String!
+  rejectionReason: String!
+  antiFraudStatus: String!
+  faceBiometryStatus: String!
+  creditAnalysisPid: String!
+  walletId: String!
+  userId: Int!
+  storeRefCode: String!
+  revScore: Int!
+
+  """Date"""
+  created_at: String!
+
+  """Date"""
+  updated_at: String!
+}
+
+input DealersTableUpdateInput {
+  id: Int
+  pid: String
+  firstName: String
+  lastName: String
+  dealerHasExperience: Boolean
+  cpf: String
+  rg: String
+  brand: String
+  gender: String
+  registerStatus: String
+  rejectionReason: String
+  antiFraudStatus: String
+  faceBiometryStatus: String
+  creditAnalysisPid: String
+  walletId: String
+  userId: Int
+  storeRefCode: String
+  revScore: Int
+
+  """Date"""
+  created_at: String
+
+  """Date"""
+  updated_at: String
+}
+
+input DealersTableFilters {
+  id: DealersTableIdFilters
+  pid: DealersTablePidFilters
+  firstName: DealersTableFirstNameFilters
+  lastName: DealersTableLastNameFilters
+  dealerHasExperience: DealersTableDealerHasExperienceFilters
+  cpf: DealersTableCpfFilters
+  rg: DealersTableRgFilters
+  brand: DealersTableBrandFilters
+  gender: DealersTableGenderFilters
+  registerStatus: DealersTableRegisterStatusFilters
+  rejectionReason: DealersTableRejectionReasonFilters
+  antiFraudStatus: DealersTableAntiFraudStatusFilters
+  faceBiometryStatus: DealersTableFaceBiometryStatusFilters
+  creditAnalysisPid: DealersTableCreditAnalysisPidFilters
+  walletId: DealersTableWalletIdFilters
+  userId: DealersTableUserIdFilters
+  storeRefCode: DealersTableStoreRefCodeFilters
+  revScore: DealersTableRevScoreFilters
+  created_at: DealersTableCreated_atFilters
+  updated_at: DealersTableUpdated_atFilters
+  OR: [DealersTableFiltersOr!]
+}
+
+input DealersTableIdFilters {
+  eq: Int
+  ne: Int
+  lt: Int
+  lte: Int
+  gt: Int
+  gte: Int
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+
+  """Array<undefined>"""
+  inArray: [Int!]
+
+  """Array<undefined>"""
+  notInArray: [Int!]
+  isNull: Boolean
+  isNotNull: Boolean
+  OR: [DealersTableIdfiltersOr!]
+}
+
+input DealersTableIdfiltersOr {
+  eq: Int
+  ne: Int
+  lt: Int
+  lte: Int
+  gt: Int
+  gte: Int
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+
+  """Array<undefined>"""
+  inArray: [Int!]
+
+  """Array<undefined>"""
+  notInArray: [Int!]
+  isNull: Boolean
+  isNotNull: Boolean
+}
+
+input DealersTablePidFilters {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+
+  """Array<undefined>"""
+  inArray: [String!]
+
+  """Array<undefined>"""
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+  OR: [DealersTablePidfiltersOr!]
+}
+
+input DealersTablePidfiltersOr {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+
+  """Array<undefined>"""
+  inArray: [String!]
+
+  """Array<undefined>"""
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+}
+
+input DealersTableFirstNameFilters {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+
+  """Array<undefined>"""
+  inArray: [String!]
+
+  """Array<undefined>"""
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+  OR: [DealersTableFirstNamefiltersOr!]
+}
+
+input DealersTableFirstNamefiltersOr {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+
+  """Array<undefined>"""
+  inArray: [String!]
+
+  """Array<undefined>"""
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+}
+
+input DealersTableLastNameFilters {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+
+  """Array<undefined>"""
+  inArray: [String!]
+
+  """Array<undefined>"""
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+  OR: [DealersTableLastNamefiltersOr!]
+}
+
+input DealersTableLastNamefiltersOr {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+
+  """Array<undefined>"""
+  inArray: [String!]
+
+  """Array<undefined>"""
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+}
+
+input DealersTableDealerHasExperienceFilters {
+  eq: Boolean
+  ne: Boolean
+  lt: Boolean
+  lte: Boolean
+  gt: Boolean
+  gte: Boolean
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+
+  """Array<undefined>"""
+  inArray: [Boolean!]
+
+  """Array<undefined>"""
+  notInArray: [Boolean!]
+  isNull: Boolean
+  isNotNull: Boolean
+  OR: [DealersTableDealerHasExperiencefiltersOr!]
+}
+
+input DealersTableDealerHasExperiencefiltersOr {
+  eq: Boolean
+  ne: Boolean
+  lt: Boolean
+  lte: Boolean
+  gt: Boolean
+  gte: Boolean
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+
+  """Array<undefined>"""
+  inArray: [Boolean!]
+
+  """Array<undefined>"""
+  notInArray: [Boolean!]
+  isNull: Boolean
+  isNotNull: Boolean
+}
+
+input DealersTableCpfFilters {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+
+  """Array<undefined>"""
+  inArray: [String!]
+
+  """Array<undefined>"""
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+  OR: [DealersTableCpffiltersOr!]
+}
+
+input DealersTableCpffiltersOr {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+
+  """Array<undefined>"""
+  inArray: [String!]
+
+  """Array<undefined>"""
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+}
+
+input DealersTableRgFilters {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+
+  """Array<undefined>"""
+  inArray: [String!]
+
+  """Array<undefined>"""
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+  OR: [DealersTableRgfiltersOr!]
+}
+
+input DealersTableRgfiltersOr {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+
+  """Array<undefined>"""
+  inArray: [String!]
+
+  """Array<undefined>"""
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+}
+
+input DealersTableBrandFilters {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+
+  """Array<undefined>"""
+  inArray: [String!]
+
+  """Array<undefined>"""
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+  OR: [DealersTableBrandfiltersOr!]
+}
+
+input DealersTableBrandfiltersOr {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+
+  """Array<undefined>"""
+  inArray: [String!]
+
+  """Array<undefined>"""
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+}
+
+input DealersTableGenderFilters {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+
+  """Array<undefined>"""
+  inArray: [String!]
+
+  """Array<undefined>"""
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+  OR: [DealersTableGenderfiltersOr!]
+}
+
+input DealersTableGenderfiltersOr {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+
+  """Array<undefined>"""
+  inArray: [String!]
+
+  """Array<undefined>"""
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+}
+
+input DealersTableRegisterStatusFilters {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+
+  """Array<undefined>"""
+  inArray: [String!]
+
+  """Array<undefined>"""
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+  OR: [DealersTableRegisterStatusfiltersOr!]
+}
+
+input DealersTableRegisterStatusfiltersOr {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+
+  """Array<undefined>"""
+  inArray: [String!]
+
+  """Array<undefined>"""
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+}
+
+input DealersTableRejectionReasonFilters {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+
+  """Array<undefined>"""
+  inArray: [String!]
+
+  """Array<undefined>"""
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+  OR: [DealersTableRejectionReasonfiltersOr!]
+}
+
+input DealersTableRejectionReasonfiltersOr {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+
+  """Array<undefined>"""
+  inArray: [String!]
+
+  """Array<undefined>"""
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+}
+
+input DealersTableAntiFraudStatusFilters {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+
+  """Array<undefined>"""
+  inArray: [String!]
+
+  """Array<undefined>"""
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+  OR: [DealersTableAntiFraudStatusfiltersOr!]
+}
+
+input DealersTableAntiFraudStatusfiltersOr {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+
+  """Array<undefined>"""
+  inArray: [String!]
+
+  """Array<undefined>"""
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+}
+
+input DealersTableFaceBiometryStatusFilters {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+
+  """Array<undefined>"""
+  inArray: [String!]
+
+  """Array<undefined>"""
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+  OR: [DealersTableFaceBiometryStatusfiltersOr!]
+}
+
+input DealersTableFaceBiometryStatusfiltersOr {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+
+  """Array<undefined>"""
+  inArray: [String!]
+
+  """Array<undefined>"""
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+}
+
+input DealersTableCreditAnalysisPidFilters {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+
+  """Array<undefined>"""
+  inArray: [String!]
+
+  """Array<undefined>"""
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+  OR: [DealersTableCreditAnalysisPidfiltersOr!]
+}
+
+input DealersTableCreditAnalysisPidfiltersOr {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+
+  """Array<undefined>"""
+  inArray: [String!]
+
+  """Array<undefined>"""
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+}
+
+input DealersTableWalletIdFilters {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+
+  """Array<undefined>"""
+  inArray: [String!]
+
+  """Array<undefined>"""
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+  OR: [DealersTableWalletIdfiltersOr!]
+}
+
+input DealersTableWalletIdfiltersOr {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+
+  """Array<undefined>"""
+  inArray: [String!]
+
+  """Array<undefined>"""
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+}
+
+input DealersTableUserIdFilters {
+  eq: Int
+  ne: Int
+  lt: Int
+  lte: Int
+  gt: Int
+  gte: Int
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+
+  """Array<undefined>"""
+  inArray: [Int!]
+
+  """Array<undefined>"""
+  notInArray: [Int!]
+  isNull: Boolean
+  isNotNull: Boolean
+  OR: [DealersTableUserIdfiltersOr!]
+}
+
+input DealersTableUserIdfiltersOr {
+  eq: Int
+  ne: Int
+  lt: Int
+  lte: Int
+  gt: Int
+  gte: Int
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+
+  """Array<undefined>"""
+  inArray: [Int!]
+
+  """Array<undefined>"""
+  notInArray: [Int!]
+  isNull: Boolean
+  isNotNull: Boolean
+}
+
+input DealersTableStoreRefCodeFilters {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+
+  """Array<undefined>"""
+  inArray: [String!]
+
+  """Array<undefined>"""
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+  OR: [DealersTableStoreRefCodefiltersOr!]
+}
+
+input DealersTableStoreRefCodefiltersOr {
+  eq: String
+  ne: String
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+
+  """Array<undefined>"""
+  inArray: [String!]
+
+  """Array<undefined>"""
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+}
+
+input DealersTableRevScoreFilters {
+  eq: Int
+  ne: Int
+  lt: Int
+  lte: Int
+  gt: Int
+  gte: Int
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+
+  """Array<undefined>"""
+  inArray: [Int!]
+
+  """Array<undefined>"""
+  notInArray: [Int!]
+  isNull: Boolean
+  isNotNull: Boolean
+  OR: [DealersTableRevScorefiltersOr!]
+}
+
+input DealersTableRevScorefiltersOr {
+  eq: Int
+  ne: Int
+  lt: Int
+  lte: Int
+  gt: Int
+  gte: Int
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+
+  """Array<undefined>"""
+  inArray: [Int!]
+
+  """Array<undefined>"""
+  notInArray: [Int!]
+  isNull: Boolean
+  isNotNull: Boolean
+}
+
+input DealersTableCreated_atFilters {
+  """Date"""
+  eq: String
+
+  """Date"""
+  ne: String
+
+  """Date"""
+  lt: String
+
+  """Date"""
+  lte: String
+
+  """Date"""
+  gt: String
+
+  """Date"""
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+
+  """Array<Date>"""
+  inArray: [String!]
+
+  """Array<Date>"""
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+  OR: [DealersTableCreated_atfiltersOr!]
+}
+
+input DealersTableCreated_atfiltersOr {
+  """Date"""
+  eq: String
+
+  """Date"""
+  ne: String
+
+  """Date"""
+  lt: String
+
+  """Date"""
+  lte: String
+
+  """Date"""
+  gt: String
+
+  """Date"""
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+
+  """Array<Date>"""
+  inArray: [String!]
+
+  """Array<Date>"""
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+}
+
+input DealersTableUpdated_atFilters {
+  """Date"""
+  eq: String
+
+  """Date"""
+  ne: String
+
+  """Date"""
+  lt: String
+
+  """Date"""
+  lte: String
+
+  """Date"""
+  gt: String
+
+  """Date"""
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+
+  """Array<Date>"""
+  inArray: [String!]
+
+  """Array<Date>"""
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+  OR: [DealersTableUpdated_atfiltersOr!]
+}
+
+input DealersTableUpdated_atfiltersOr {
+  """Date"""
+  eq: String
+
+  """Date"""
+  ne: String
+
+  """Date"""
+  lt: String
+
+  """Date"""
+  lte: String
+
+  """Date"""
+  gt: String
+
+  """Date"""
+  gte: String
+  like: String
+  notLike: String
+  ilike: String
+  notIlike: String
+
+  """Array<Date>"""
+  inArray: [String!]
+
+  """Array<Date>"""
+  notInArray: [String!]
+  isNull: Boolean
+  isNotNull: Boolean
+}
+
+input DealersTableFiltersOr {
+  id: DealersTableIdFilters
+  pid: DealersTablePidFilters
+  firstName: DealersTableFirstNameFilters
+  lastName: DealersTableLastNameFilters
+  dealerHasExperience: DealersTableDealerHasExperienceFilters
+  cpf: DealersTableCpfFilters
+  rg: DealersTableRgFilters
+  brand: DealersTableBrandFilters
+  gender: DealersTableGenderFilters
+  registerStatus: DealersTableRegisterStatusFilters
+  rejectionReason: DealersTableRejectionReasonFilters
+  antiFraudStatus: DealersTableAntiFraudStatusFilters
+  faceBiometryStatus: DealersTableFaceBiometryStatusFilters
+  creditAnalysisPid: DealersTableCreditAnalysisPidFilters
+  walletId: DealersTableWalletIdFilters
+  userId: DealersTableUserIdFilters
+  storeRefCode: DealersTableStoreRefCodeFilters
+  revScore: DealersTableRevScoreFilters
+  created_at: DealersTableCreated_atFilters
+  updated_at: DealersTableUpdated_atFilters
+}
+
+input DealersTableOrderBy {
+  id: InnerOrder
+  pid: InnerOrder
+  firstName: InnerOrder
+  lastName: InnerOrder
+  dealerHasExperience: InnerOrder
+  cpf: InnerOrder
+  rg: InnerOrder
+  brand: InnerOrder
+  gender: InnerOrder
+  registerStatus: InnerOrder
+  rejectionReason: InnerOrder
+  antiFraudStatus: InnerOrder
+  faceBiometryStatus: InnerOrder
+  creditAnalysisPid: InnerOrder
+  walletId: InnerOrder
+  userId: InnerOrder
+  storeRefCode: InnerOrder
+  revScore: InnerOrder
+  created_at: InnerOrder
+  updated_at: InnerOrder
+}
+
+input InnerOrder {
+  direction: OrderDirection!
+
+  """Priority of current field"""
+  priority: Int!
+}
+
+"""Order by direction"""
+enum OrderDirection {
+  """Ascending order"""
+  asc
+
+  """Descending order"""
+  desc
+}
+
+input UsersTableInsertInput {
+  id: Int!
+  pid: String!
+  email: String!
+  password: String!
+  phone: String!
+
+  """Date"""
+  created_at: String!
+
+  """Date"""
+  updated_at: String!
+}
+
+input UsersTableUpdateInput {
+  id: Int
+  pid: String
+  email: String
+  password: String
+  phone: String
+
+  """Date"""
+  created_at: String
+
+  """Date"""
+  updated_at: String
+}
+
+input UsersTableFilters {
+  id: UserIdFilters
+  pid: UserPidFilters
+  email: UserEmailFilters
+  password: UserPasswordFilters
+  phone: UserPhoneFilters
+  created_at: UserCreated_atFilters
+  updated_at: UserUpdated_atFilters
+  OR: [UsersTableFiltersOr!]
+}
+
+input UsersTableFiltersOr {
+  id: UserIdFilters
+  pid: UserPidFilters
+  email: UserEmailFilters
+  password: UserPasswordFilters
+  phone: UserPhoneFilters
+  created_at: UserCreated_atFilters
+  updated_at: UserUpdated_atFilters
+}
+
+input UsersTableOrderBy {
+  id: InnerOrder
+  pid: InnerOrder
+  email: InnerOrder
+  password: InnerOrder
+  phone: InnerOrder
+  created_at: InnerOrder
+  updated_at: InnerOrder
+}
+
+type Query {
+  dealerstable(offset: Int, limit: Int, orderBy: DealersTableOrderBy, where: DealersTableFilters): [DealersTableSelectItem!]!
+  dealerstableSingle(offset: Int, orderBy: DealersTableOrderBy, where: DealersTableFilters): DealersTableSelectItem
+  userstable(offset: Int, limit: Int, orderBy: UsersTableOrderBy, where: UsersTableFilters): [UsersTableSelectItem!]!
+  userstableSingle(offset: Int, orderBy: UsersTableOrderBy, where: UsersTableFilters): UsersTableSelectItem
+}
+
+type Mutation {
+  insertIntoDealersTable(values: [DealersTableInsertInput!]!): MutationReturn
+  insertIntoDealersTableSingle(values: DealersTableInsertInput!): MutationReturn
+  updateDealersTable(set: DealersTableUpdateInput!, where: DealersTableFilters): MutationReturn
+  deleteFromdealersTable(where: DealersTableFilters): MutationReturn
+  insertIntoUsersTable(values: [UsersTableInsertInput!]!): MutationReturn
+  insertIntoUsersTableSingle(values: UsersTableInsertInput!): MutationReturn
+  updateUsersTable(set: UsersTableUpdateInput!, where: UsersTableFilters): MutationReturn
+  deleteFromusersTable(where: UsersTableFilters): MutationReturn
+}

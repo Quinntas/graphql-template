@@ -1,0 +1,29 @@
+{
+    "name": "graphql-template",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "dev": "cross-env nodemon --exec ts-node ./src/index.ts"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "@types/node": "^20.12.8",
+        "cross-env": "^7.0.3",
+        "dotenv": "^16.4.5",
+        "nodemon": "^3.1.0",
+        "rimraf": "^5.0.5",
+        "ts-node": "^10.9.2",
+        "typescript": "^5.4.5"
+    },
+    "dependencies": {
+        "drizzle-graphql": "^0.3.5",
+        "drizzle-kit": "^0.20.17",
+        "drizzle-orm": "^0.30.10",
+        "graphql": "^16.8.1",
+        "graphql-jit": "^0.8.6",
+        "mysql2": "^3.9.7"
+    }
+}
