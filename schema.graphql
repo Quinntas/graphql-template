@@ -1532,15 +1532,14 @@ type Query {
   dealerstableSingle(offset: Int, orderBy: DealersTableOrderBy, where: DealersTableFilters): DealersTableSelectItem
   userstable(offset: Int, limit: Int, orderBy: UsersTableOrderBy, where: UsersTableFilters): [UsersTableSelectItem!]!
   userstableSingle(offset: Int, orderBy: UsersTableOrderBy, where: UsersTableFilters): UsersTableSelectItem
+  login(loginInput: loginInput): loginOutput
 }
 
-type Mutation {
-  insertIntoDealersTable(values: [DealersTableInsertInput!]!): MutationReturn
-  insertIntoDealersTableSingle(values: DealersTableInsertInput!): MutationReturn
-  updateDealersTable(set: DealersTableUpdateInput!, where: DealersTableFilters): MutationReturn
-  deleteFromdealersTable(where: DealersTableFilters): MutationReturn
-  insertIntoUsersTable(values: [UsersTableInsertInput!]!): MutationReturn
-  insertIntoUsersTableSingle(values: UsersTableInsertInput!): MutationReturn
-  updateUsersTable(set: UsersTableUpdateInput!, where: UsersTableFilters): MutationReturn
-  deleteFromusersTable(where: UsersTableFilters): MutationReturn
+type loginOutput {
+  token: String!
+}
+
+input loginInput {
+  email: String!
+  password: String!
 }

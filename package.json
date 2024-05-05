@@ -4,7 +4,8 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-        "dev": "cross-env nodemon --exec ts-node ./src/index.ts"
+        "dev": "cross-env nodemon --exec ts-node ./src/infra/index.ts",
+        "gen:schema": "cross-env ts-node ./src/infra/graphql/genSchema.ts"
     },
     "keywords": [],
     "author": "",
@@ -27,3 +28,4 @@
         "mysql2": "^3.9.7"
     }
 }
+
