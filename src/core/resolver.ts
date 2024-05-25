@@ -3,21 +3,39 @@ import {
     GraphQLInputFieldConfig,
     GraphQLInputObjectType,
     GraphQLInputType,
+    GraphQLNonNull,
     GraphQLObjectType,
     GraphQLOutputType,
     GraphQLResolveInfo,
     ThunkObjMap,
 } from 'graphql';
 import {Context} from '../modules/shared/domain/context';
+import {GraphQLScalarType} from "graphql/type";
 
-export abstract class Resolver<Input, Output> {
-    private type: ThunkObjMap<GraphQLFieldConfig<any, any>>;
-    private output: GraphQLOutputType;
-    private input: GraphQLInputType;
+type GraphQLString<T> = T extends GraphQLNonNull<GraphQLScalarType<string, string>> ? string : T extends GraphQLScalarType<string, string> ? string | null : never;
+type GraphQLNumber<T> = T extends GraphQLNonNull<GraphQLScalarType<number, number>> ? number : T extends GraphQLScalarType<number, number> ? number | null : never;
+type GraphQLBoolean<T> = T extends GraphQLNonNull<GraphQLScalarType<boolean, boolean>> ? boolean : T extends GraphQLScalarType<boolean, boolean> ? boolean | null : never;
 
-    private typeName: string;
-    private inputName: string;
-    private outputName: string;
+export type DTO<Field extends Fields> = {
+    [key in keyof Field]: GraphQLString<Field[key]['type']> | GraphQLNumber<Field[key]['type']> | GraphQLBoolean<Field[key]['type']>
+}
+
+export type GraphQLMaybeScalar = GraphQLNonNull<GraphQLScalarType<any, any>> | GraphQLScalarType<any, any>
+
+interface Fields {
+    [key: string]: {
+        type: GraphQLMaybeScalar
+    }
+}
+
+export abstract class Resolver<Input extends Fields, Output extends Fields> {
+    private readonly type: ThunkObjMap<GraphQLFieldConfig<any, any>>;
+    private readonly output: GraphQLOutputType;
+    private readonly input: GraphQLInputType;
+
+    private readonly typeName: string;
+    private readonly inputName: string;
+    private readonly outputName: string;
 
     getType() {
         return this.type;
@@ -53,7 +71,7 @@ export abstract class Resolver<Input, Output> {
                 resolve: async (
                     root: null,
                     args: {
-                        [key: string]: Input;
+                        [key: string]: DTO<Input>;
                     },
                     context: Context,
                     resolveInfo: GraphQLResolveInfo,
@@ -66,8 +84,8 @@ export abstract class Resolver<Input, Output> {
 
     protected abstract resolverFn(
         root: null,
-        input: Input,
+        input: DTO<Input>,
         context: Context,
         resolveInfo?: GraphQLResolveInfo,
-    ): Promise<Output>;
+    ): Promise<DTO<Output>>;
 }

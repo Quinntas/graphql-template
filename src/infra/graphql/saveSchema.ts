@@ -2,7 +2,7 @@ import {createWriteStream} from 'fs';
 import {printSchema} from 'graphql';
 import {schema} from './schema';
 
-function genSchema() {
+function saveSchema() {
     console.log('Generating schema');
 
     const f = createWriteStream('./schema.graphql');
@@ -11,4 +11,4 @@ function genSchema() {
     console.log('Schema generated');
 }
 
-genSchema();
+saveSchema();

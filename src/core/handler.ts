@@ -34,7 +34,7 @@ function checkForValidEndpoint(url: string | undefined, endpoint: string) {
     if (url != endpoint) throw notFound;
 }
 
-export function httphandler(req: IncomingMessage, res: ServerResponse) {
+export function httpHandler(req: IncomingMessage, res: ServerResponse) {
     let payload = '';
 
     req.on('data', (chunk: Buffer) => {
@@ -44,7 +44,6 @@ export function httphandler(req: IncomingMessage, res: ServerResponse) {
     req.on('end', async () => {
         try {
             checkForValidEndpoint(req.url, '/graphql');
-
             return await handleQuery(payload, res);
         } catch (e: any) {
             return handleError(res, e);

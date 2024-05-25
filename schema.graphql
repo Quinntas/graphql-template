@@ -1528,10 +1528,6 @@ input UsersTableOrderBy {
 }
 
 type Query {
-  dealerstable(offset: Int, limit: Int, orderBy: DealersTableOrderBy, where: DealersTableFilters): [DealersTableSelectItem!]!
-  dealerstableSingle(offset: Int, orderBy: DealersTableOrderBy, where: DealersTableFilters): DealersTableSelectItem
-  userstable(offset: Int, limit: Int, orderBy: UsersTableOrderBy, where: UsersTableFilters): [UsersTableSelectItem!]!
-  userstableSingle(offset: Int, orderBy: UsersTableOrderBy, where: UsersTableFilters): UsersTableSelectItem
   login(loginInput: loginInput): loginOutput
 }
 

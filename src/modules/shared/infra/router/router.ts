@@ -1,4 +1,4 @@
-import {loginResolver} from '../../../user/resolvers/login';
+import {loginResolver} from '../../../user/resolvers/userLogin';
 
 export function router() {
     return {
