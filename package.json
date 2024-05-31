@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "cross-env NODE_ENV=development tsx watch ./src/infra/index.ts",
+    "dev": "pnpm run schema:save && cross-env NODE_ENV=development tsx watch ./src/infra/index.ts",
     "schema:save": "cross-env tsx src/infra/graphql/saveSchema.ts",
     "build": "rimraf ./dist && tsc && pnpm run schema:save",
     "prepare": "husky",
