@@ -1,19 +1,22 @@
-import {buildSchema} from 'drizzle-graphql';
 import {GraphQLObjectType, GraphQLSchema} from 'graphql';
-import {router} from '../../modules/shared/infra/router/router';
-import {db} from '../database/drizzle';
-
-export const {entities} = buildSchema(db);
+import {entities} from '../database/drizzle';
+import {MainRouter} from '../router/router';
 
 function genSchema() {
     return new GraphQLSchema({
         query: new GraphQLObjectType({
             name: 'Query',
             fields: {
-                ...router(),
+                ...MainRouter.getQueries(),
             },
         }),
         types: [...Object.values(entities.types), ...Object.values(entities.inputs)],
+        mutation: new GraphQLObjectType({
+            name: 'Mutation',
+            fields: {
+                ...MainRouter.getMutations(),
+            },
+        }),
     });
 }
 

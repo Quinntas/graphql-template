@@ -1,3 +1,3 @@
 import {UserLoginResolver} from './userLoginResolver';
 
-export const loginResolver = new UserLoginResolver();
+export const userLoginResolver = new UserLoginResolver();

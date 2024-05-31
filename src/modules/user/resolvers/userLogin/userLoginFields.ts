@@ -8,4 +8,6 @@ export const userLoginInputFields = {
 
 export const userLoginOutputFields = {
     token: newNonNullField(GraphQLString),
+    // @ts-ignore
+    // data: newField(entities.types['UsersTableSelectItem'])
 };

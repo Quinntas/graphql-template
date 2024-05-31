@@ -12,6 +12,8 @@ import {
 import {GraphQLScalarType} from 'graphql/type';
 import {Context} from '../modules/shared/domain/context';
 
+type GraphQLRoute = 'query' | 'mutation';
+
 type GraphQLString<T> =
     T extends GraphQLNonNull<GraphQLScalarType<string, string>> ? string : T extends GraphQLScalarType<string, string> ? string | null : never;
 type GraphQLNumber<T> =
@@ -40,14 +42,29 @@ export abstract class Resolver<Input extends Fields, Output extends Fields> {
     private readonly inputName: string;
     private readonly outputName: string;
 
+    private readonly route: GraphQLRoute;
+
+    getRoute() {
+        return this.route;
+    }
+
     getType() {
         return this.type;
     }
 
-    protected constructor(name: string, inputFields: ThunkObjMap<GraphQLInputFieldConfig>, outputFields: ThunkObjMap<GraphQLFieldConfig<any, any, any>>) {
+    protected constructor(
+        name: string,
+        route: GraphQLRoute,
+        inputFields: ThunkObjMap<GraphQLInputFieldConfig>,
+        outputFields: ThunkObjMap<GraphQLFieldConfig<any, any, any>>,
+    ) {
+        this.route = route;
+
         this.typeName = `${name}`;
         this.inputName = `${name}Input`;
         this.outputName = `${name}Output`;
+
+        const hasInputFields = Object.keys(inputFields).length > 0;
 
         this.input = new GraphQLInputObjectType({
             name: this.inputName,
@@ -62,11 +79,11 @@ export abstract class Resolver<Input extends Fields, Output extends Fields> {
         this.type = {
             [this.typeName]: {
                 type: this.output,
-                args: {
+                args: hasInputFields ? {
                     [this.inputName]: {
                         type: this.input,
                     },
-                },
+                } : {},
                 resolve: async (
                     root: null,
                     args: {
