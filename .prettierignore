@@ -1,0 +1,8 @@
+*.json
+*.md
+*.yml
+*.yaml
+schema.graphql
+Dockerfile
+LICENSE
+pnpm-lock.yaml
