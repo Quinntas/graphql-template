@@ -3,10 +3,13 @@
   "display": "Default",
   "compilerOptions": {
     "outDir": "./dist",
-    "lib": ["ES2023"],
+    "lib": [
+      "ES2023"
+    ],
     "module": "node16",
     "target": "ES2022",
     "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
     "strict": true,
     "strictNullChecks": true,
     "strictFunctionTypes": true,
