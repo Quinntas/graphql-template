@@ -1,6 +1,6 @@
 import {DTO, Resolver} from '../../../../core/resolver';
 import {Context} from '../../../shared/domain/context';
-import {userLoginInputFields, userLoginOutputFields} from "./userLoginFields";
+import {userLoginInputFields, userLoginOutputFields} from './userLoginFields';
 
 export class UserLoginResolver extends Resolver<typeof userLoginInputFields, typeof userLoginOutputFields> {
     constructor() {
@@ -8,8 +8,8 @@ export class UserLoginResolver extends Resolver<typeof userLoginInputFields, typ
     }
 
     async resolverFn(_: null, input: DTO<typeof userLoginInputFields>, context: Context) {
-        console.log(input)
-        console.log(context)
+        console.log(input);
+        console.log(context);
         return {
             token: '',
         };

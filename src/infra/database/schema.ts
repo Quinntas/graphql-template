@@ -1,5 +1,5 @@
-import {boolean, datetime, int, mysqlEnum, mysqlTable, varchar} from 'drizzle-orm/mysql-core';
 import {relations} from 'drizzle-orm';
+import {boolean, datetime, int, mysqlEnum, mysqlTable, varchar} from 'drizzle-orm/mysql-core';
 
 export const dealersTable = mysqlTable('Dealers', {
     id: int('id').primaryKey(),

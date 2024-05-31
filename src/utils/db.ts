@@ -1,5 +1,5 @@
-import {SQL} from "drizzle-orm";
-import {MySqlDialect} from "drizzle-orm/mysql-core";
+import {SQL} from 'drizzle-orm';
+import {MySqlDialect} from 'drizzle-orm/mysql-core';
 
 export namespace DBUtils {
     export function logQuery(q: SQL) {

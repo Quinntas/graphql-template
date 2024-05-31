@@ -1,10 +1,9 @@
-import {GraphQLScalarType} from "graphql/type";
-import {Kind} from "graphql/language";
+import {Kind} from 'graphql/language';
+import {GraphQLScalarType} from 'graphql/type';
 
 /*
-* Hope no one ever uses this
-* */
-
+ * Hope no one ever uses this
+ * */
 
 export const anyScalar = new GraphQLScalarType({
     name: 'Any',
@@ -13,7 +12,7 @@ export const anyScalar = new GraphQLScalarType({
         switch (typeof value) {
             case 'string':
             case 'number':
-            case "object":
+            case 'object':
             case 'boolean':
                 return value;
             default:
@@ -24,7 +23,7 @@ export const anyScalar = new GraphQLScalarType({
         switch (typeof value) {
             case 'string':
             case 'number':
-            case "object":
+            case 'object':
             case 'boolean':
                 return value;
             default:
@@ -40,9 +39,9 @@ export const anyScalar = new GraphQLScalarType({
             case Kind.INT:
             case Kind.BOOLEAN:
             case Kind.FLOAT:
-                return ast
+                return ast;
             default:
                 return null;
         }
     },
-})
+});

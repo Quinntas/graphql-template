@@ -1,6 +1,6 @@
-import {GraphQLEnumType} from "graphql/type";
+import {GraphQLEnumType} from 'graphql/type';
 
-export function newEnumType(name: string, e: { [s: number]: string }) {
+export function newEnumType(name: string, e: {[s: number]: string}) {
     const vals = Object.getOwnPropertyNames(e);
 
     return new GraphQLEnumType({

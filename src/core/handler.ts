@@ -1,9 +1,9 @@
+import {parse} from 'graphql';
+import {compileQuery} from 'graphql-jit';
 import {IncomingMessage, ServerResponse} from 'http';
+import {schema} from '../infra/graphql/schema';
 import {HttpError, internalServerError, notFound} from './errors';
 import {jsonResponse} from './responses';
-import {schema} from '../infra/graphql/schema';
-import {compileQuery} from 'graphql-jit';
-import {parse} from 'graphql';
 
 let cache = {};
 

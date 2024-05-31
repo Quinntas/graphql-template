@@ -1,7 +1,7 @@
 import {buildSchema} from 'drizzle-graphql';
 import {GraphQLObjectType, GraphQLSchema} from 'graphql';
-import {db} from '../database/drizzle';
 import {router} from '../../modules/shared/infra/router/router';
+import {db} from '../database/drizzle';
 
 export const {entities} = buildSchema(db);
 
