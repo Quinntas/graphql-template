@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "cross-env NODE_ENV=development tsx watch ./src/infra/index.ts",
     "schema:save": "cross-env tsx src/infra/graphql/saveSchema.ts",
-    "build": "rimraf ./dist && tsc && pnpm run schema:save"
+    "build": "rimraf ./dist && tsc && pnpm run schema:save",
+    "prepare": "husky"
   },
   "keywords": [],
   "author": "",
@@ -16,7 +17,8 @@
     "cross-env": "^7.0.3",
     "dotenv": "^16.4.5",
     "rimraf": "^5.0.5",
-    "typescript": "^5.4.5"
+    "typescript": "^5.4.5",
+    "husky": "^9.0.11"
   },
   "dependencies": {
     "drizzle-graphql": "^0.3.5",
