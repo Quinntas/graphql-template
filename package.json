@@ -8,7 +8,8 @@
     "schema:save": "cross-env tsx src/infra/graphql/saveSchema.ts",
     "build": "rimraf ./dist && tsc && pnpm run schema:save",
     "prepare": "husky",
-    "format": "prettier . --write --ignore-unknown"
+    "format": "prettier . --write --ignore-unknown",
+    "start": "node dist/infra/index.js"
   },
   "keywords": [],
   "author": "",
