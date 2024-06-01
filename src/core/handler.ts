@@ -6,6 +6,7 @@ import {schema} from '../infra/graphql/schema';
 import {Context} from '../modules/shared/domain/context';
 import {HttpError, internalServerError, notFound} from './errors';
 import {jsonResponse} from './responses';
+import {DecodedRequest} from "./types/decodedRequest";
 
 export function handleError(res: ServerResponse, error: Error) {
     switch (true) {
@@ -27,9 +28,9 @@ interface Cache {
 
 let cache: Cache = {};
 
-async function handleQuery(payload: string, req: IncomingMessage, res: ServerResponse) {
+async function handleQuery(payload: string, req: DecodedRequest, res: ServerResponse) {
     if (payload.length === 0) throw new HttpError(400, 'no query provided');
-
+    
     const inp = JSON.parse(payload);
     const query = inp.query;
 
@@ -40,7 +41,7 @@ async function handleQuery(payload: string, req: IncomingMessage, res: ServerRes
     const result = await cache[query].query(
         {},
         {
-            bearer: req.headers.authorization ?? '', // TODO
+            bearer: req.bearer
         } satisfies Context,
         inp.variables,
     );
@@ -51,6 +52,23 @@ async function handleQuery(payload: string, req: IncomingMessage, res: ServerRes
 function checkForValidEndpoint(url: string | undefined, endpoint: string) {
     if (!url) throw notFound;
     if (url != endpoint) throw notFound;
+}
+
+function decodeRequest(req: IncomingMessage): DecodedRequest {
+    const auth = req.headers.authorization;
+
+    if (!auth)
+        throw new HttpError(401, 'missing authorization header');
+
+    const splitAuth = auth.split(' ');
+
+    if (splitAuth.length !== 2 || splitAuth[0] !== 'Bearer')
+        throw new HttpError(401, 'invalid authorization header');
+
+    return {
+        ...req,
+        bearer: splitAuth[1],
+    } as DecodedRequest
 }
 
 export function httpHandler(req: IncomingMessage, res: ServerResponse) {
@@ -68,7 +86,7 @@ export function httpHandler(req: IncomingMessage, res: ServerResponse) {
 
     req.on('end', async () => {
         try {
-            return await handleQuery(payload, req, res);
+            return await handleQuery(payload, decodeRequest(req), res);
         } catch (e: any) {
             return handleError(res, e);
         }

@@ -25,15 +25,18 @@ type GraphQLObject<T> = T extends GraphQLObjectType ? T | null : never;
 
 export type DTO<Field extends Fields> = {
     [key in keyof Field]:
-        | GraphQLString<Field[key]['type']>
-        | GraphQLNumber<Field[key]['type']>
-        | GraphQLBoolean<Field[key]['type']>
-        | GraphQLObject<Field[key]['type']>;
+    | GraphQLString<Field[key]['type']>
+    | GraphQLNumber<Field[key]['type']>
+    | GraphQLBoolean<Field[key]['type']>
+    | GraphQLObject<Field[key]['type']>
 };
 
-export type GraphQLMaybeScalar = GraphQLNonNull<GraphQLScalarType<any, any>> | GraphQLScalarType<any, any> | GraphQLObject<any>;
+export type GraphQLMaybeScalar =
+    GraphQLNonNull<GraphQLScalarType<any, any> | GraphQLObject<any>>
+    | GraphQLScalarType<any, any>
+    | GraphQLObject<any>;
 
-interface Fields {
+export interface Fields {
     [key: string]: {
         type: GraphQLMaybeScalar;
     };
@@ -87,10 +90,10 @@ export abstract class Resolver<Input extends Fields, Output extends Fields> {
                 type: this.output,
                 args: hasInputFields
                     ? {
-                          [this.inputName]: {
-                              type: this.input,
-                          },
-                      }
+                        [this.inputName]: {
+                            type: this.input,
+                        },
+                    }
                     : {},
                 resolve: async (
                     root: null,
