@@ -1,6 +1,6 @@
 import {DTO, Resolver} from '../../../../core/resolver';
 import {Context} from '../../../shared/domain/context';
-import {userMeInputFields, userMeOutputFields} from "./userMeFields";
+import {userMeInputFields, userMeOutputFields} from './userMeFields';
 
 export class UserMeResolver extends Resolver<typeof userMeInputFields, typeof userMeOutputFields> {
     constructor() {

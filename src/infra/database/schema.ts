@@ -1,6 +1,6 @@
 import {datetime, int, mysqlTable, varchar} from 'drizzle-orm/mysql-core';
 
-export const usersTable = mysqlTable('Users', {
+export const users = mysqlTable('Users', {
     id: int('id').primaryKey(),
     pid: varchar('pid', {length: 191}).unique().notNull(),
     email: varchar('pid', {length: 191}).unique().notNull(),

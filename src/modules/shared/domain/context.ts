@@ -1,1 +1,3 @@
-export interface Context {}
+export interface Context {
+    bearer: string;
+}

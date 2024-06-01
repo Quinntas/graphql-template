@@ -1,9 +1,8 @@
-import {newField} from "../../../../infra/graphql/factories/field";
-import {entities} from "../../../../infra/database/drizzle";
+import {entities} from '../../../../infra/database/drizzle';
+import {newNonNullField} from '../../../../infra/graphql/factories/field';
 
 export const userMeInputFields = {};
 
 export const userMeOutputFields = {
-    //@ts-ignore
-    data: newField(entities.types['UsersTableSelectItem'])
+    data: newNonNullField(entities.types.UsersSelectItem),
 };
