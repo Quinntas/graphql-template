@@ -42,6 +42,14 @@ export interface Fields {
     };
 }
 
+export interface ResolverConfig {
+    name: string
+    description: string
+    route: GraphQLRoute
+    inputFields: ThunkObjMap<GraphQLInputFieldConfig>
+    outputFields: ThunkObjMap<GraphQLFieldConfig<any, any, any>>
+}
+
 export abstract class Resolver<Input extends Fields, Output extends Fields> {
     private readonly type: ThunkObjMap<GraphQLFieldConfig<any, any>>;
     private readonly output: GraphQLOutputType;
@@ -62,32 +70,30 @@ export abstract class Resolver<Input extends Fields, Output extends Fields> {
     }
 
     protected constructor(
-        name: string,
-        route: GraphQLRoute,
-        inputFields: ThunkObjMap<GraphQLInputFieldConfig>,
-        outputFields: ThunkObjMap<GraphQLFieldConfig<any, any, any>>,
+        config: ResolverConfig,
     ) {
-        this.route = route;
+        this.route = config.route;
 
-        this.typeName = `${name}`;
-        this.inputName = `${name}Input`;
-        this.outputName = `${name}Output`;
+        this.typeName = `${config.name}`;
+        this.inputName = `${config.name}Input`;
+        this.outputName = `${config.name}Output`;
 
-        const hasInputFields = Object.keys(inputFields).length > 0;
+        const hasInputFields = Object.keys(config.inputFields).length > 0;
 
         this.input = new GraphQLInputObjectType({
             name: this.inputName,
-            fields: inputFields,
+            fields: config.inputFields,
         });
 
         this.output = new GraphQLObjectType({
             name: this.outputName,
-            fields: outputFields,
+            fields: config.outputFields,
         });
 
         this.type = {
             [this.typeName]: {
                 type: this.output,
+                description: config.description,
                 args: hasInputFields
                     ? {
                         [this.inputName]: {

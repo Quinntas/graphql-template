@@ -4,7 +4,13 @@ import {userCreateInputFields, userCreateOutputFields} from "./userCreateFields"
 
 export class UserCreateResolver extends Resolver<typeof userCreateInputFields, typeof userCreateOutputFields> {
     constructor() {
-        super('userCreate', 'mutation', userCreateInputFields, userCreateOutputFields);
+        super({
+            name: 'userCreate',
+            description: 'Create a new user',
+            route: 'mutation',
+            inputFields: userCreateInputFields,
+            outputFields: userCreateOutputFields,
+        });
     }
 
     async resolverFn(_: null, input: DTO<typeof userCreateInputFields>, context: Context) {

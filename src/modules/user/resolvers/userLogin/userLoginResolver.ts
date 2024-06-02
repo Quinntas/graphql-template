@@ -4,7 +4,13 @@ import {userLoginInputFields, userLoginOutputFields} from './userLoginFields';
 
 export class UserLoginResolver extends Resolver<typeof userLoginInputFields, typeof userLoginOutputFields> {
     constructor() {
-        super('userLogin', 'mutation', userLoginInputFields, userLoginOutputFields);
+        super({
+            name: 'userLogin',
+            description: 'Login a user',
+            route: 'mutation',
+            inputFields: userLoginInputFields,
+            outputFields: userLoginOutputFields,
+        });
     }
 
     async resolverFn(_: null, input: DTO<typeof userLoginInputFields>, context: Context) {

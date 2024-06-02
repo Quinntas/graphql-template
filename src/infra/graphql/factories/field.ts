@@ -1,23 +1,21 @@
-import {GraphQLObjectType} from 'graphql';
-import {GraphQLScalarType} from 'graphql/type';
 import {GraphQLMaybeScalar} from '../../../core/resolver';
 import {newNonNull} from './nonNull';
 import {newNonNullList} from "./list";
 
-export function newField(type: GraphQLMaybeScalar | GraphQLObjectType) {
+export function newField(type: GraphQLMaybeScalar) {
     return {
         type,
     };
 }
 
-export function newFieldList(type: GraphQLScalarType | GraphQLObjectType) {
+export function newFieldList(type: GraphQLMaybeScalar) {
     return newField(newNonNullList(type));
 }
 
-export function newNonNullField(type: GraphQLScalarType | GraphQLObjectType) {
+export function newNonNullField(type: GraphQLMaybeScalar) {
     return newField(newNonNull(type));
 }
 
-export function newNonNullFieldList(type: GraphQLScalarType | GraphQLObjectType) {
+export function newNonNullFieldList(type: GraphQLMaybeScalar) {
     return newField(newNonNullList(type));
 }

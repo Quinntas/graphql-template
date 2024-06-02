@@ -4,7 +4,13 @@ import {userMeInputFields, userMeOutputFields} from './userMeFields';
 
 export class UserMeResolver extends Resolver<typeof userMeInputFields, typeof userMeOutputFields> {
     constructor() {
-        super('userMe', 'query', userMeInputFields, userMeOutputFields);
+        super({
+            name: 'userMe',
+            description: 'Get the current user',
+            route: 'query',
+            inputFields: userMeInputFields,
+            outputFields: userMeOutputFields,
+        });
     }
 
     async resolverFn(_: null, input: DTO<typeof userMeInputFields>, context: Context) {
