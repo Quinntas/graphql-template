@@ -1,32 +1,32 @@
-import {MySqlColumn, MySqlTable} from "drizzle-orm/mysql-core";
-import {forEach} from "./iterators";
-import {GraphQLBoolean, GraphQLString} from "graphql";
-import {newField, newFieldList, newInputField} from "../infra/graphql/factories/field";
-import {StringUtils} from "./stringUtils";
-import {dateScalar} from "../infra/graphql/scalars/date";
-import {GraphQLInputObjectType, GraphQLInt} from "graphql/type";
-import {newNonNull} from "../infra/graphql/factories/nonNull";
-import {Fields} from "../core/resolver";
+import {MySqlColumn, MySqlTable} from 'drizzle-orm/mysql-core';
+import {GraphQLBoolean, GraphQLString} from 'graphql';
+import {GraphQLInputObjectType, GraphQLInt} from 'graphql/type';
+import {Fields} from '../core/resolver';
+import {newField, newFieldList, newInputField} from '../infra/graphql/factories/field';
+import {newNonNull} from '../infra/graphql/factories/nonNull';
+import {dateScalar} from '../infra/graphql/scalars/date';
+import {forEach} from './iterators';
+import {StringUtils} from './stringUtils';
 
-type ColumnTypes = 'MySqlInt' | 'MySqlVarChar' | 'MySqlDateTime'
+type ColumnTypes = 'MySqlInt' | 'MySqlVarChar' | 'MySqlDateTime';
 
 const likeFilters = {
     like: newField(GraphQLString),
     notLike: newField(GraphQLString),
     ilike: newField(GraphQLString),
-    notIlike: newField(GraphQLString)
-}
+    notIlike: newField(GraphQLString),
+};
 
 const nullFilters = {
     isNull: newField(GraphQLBoolean),
-    isNotNull: newField(GraphQLBoolean)
-}
+    isNotNull: newField(GraphQLBoolean),
+};
 
 function newGraphQlFilterObject(objectName: string, colProps: MySqlColumn) {
-    let fields = {}
+    let fields = {};
 
     switch (colProps.columnType as ColumnTypes) {
-        case "MySqlInt":
+        case 'MySqlInt':
             fields = {
                 eq: newField(GraphQLInt),
                 gt: newField(GraphQLInt),
@@ -36,11 +36,11 @@ function newGraphQlFilterObject(objectName: string, colProps: MySqlColumn) {
                 inArray: newFieldList(newNonNull(GraphQLInt)),
                 notInArray: newFieldList(newNonNull(GraphQLInt)),
                 ...likeFilters,
-                ...nullFilters
-            }
-            break
+                ...nullFilters,
+            };
+            break;
 
-        case "MySqlVarChar":
+        case 'MySqlVarChar':
             fields = {
                 eq: newField(GraphQLString),
                 gt: newField(GraphQLString),
@@ -50,11 +50,11 @@ function newGraphQlFilterObject(objectName: string, colProps: MySqlColumn) {
                 inArray: newFieldList(newNonNull(GraphQLString)),
                 notInArray: newFieldList(newNonNull(GraphQLString)),
                 ...likeFilters,
-                ...nullFilters
-            }
-            break
+                ...nullFilters,
+            };
+            break;
 
-        case "MySqlDateTime":
+        case 'MySqlDateTime':
             fields = {
                 eq: newField(dateScalar),
                 gt: newField(dateScalar),
@@ -64,32 +64,28 @@ function newGraphQlFilterObject(objectName: string, colProps: MySqlColumn) {
                 inArray: newFieldList(newNonNull(dateScalar)),
                 notInArray: newFieldList(newNonNull(dateScalar)),
                 ...likeFilters,
-                ...nullFilters
-            }
-            break
+                ...nullFilters,
+            };
+            break;
 
         default:
-            throw new Error(`Unknown column type ${colProps.columnType} from ${objectName}`)
+            throw new Error(`Unknown column type ${colProps.columnType} from ${objectName}`);
     }
 
     return new GraphQLInputObjectType({
         name: `${objectName}${StringUtils.capitalize(colProps.name)}Filters`,
-        fields
-    })
+        fields,
+    });
 }
 
 export function genInputFiltersFromTable(objectName: string, table: MySqlTable) {
-    const cols = Object.keys(table)
+    const cols = Object.keys(table);
 
-    let filters: Fields = {}
+    let filters: Fields = {};
 
     forEach(cols, (col) => {
-        filters[col] = newField(newGraphQlFilterObject(objectName, (table as any)[col]))
-    })
+        filters[col] = newField(newGraphQlFilterObject(objectName, (table as any)[col]));
+    });
 
-    return newInputField(
-        `${objectName}Filters`,
-        `Filters for ${objectName} object`,
-        filters
-    )
+    return newInputField(`${objectName}Filters`, `Filters for ${objectName} object`, filters);
 }

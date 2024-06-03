@@ -20,5 +20,4 @@ function genSchema() {
     });
 }
 
-
 export const schema = genSchema();

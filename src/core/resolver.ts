@@ -24,7 +24,11 @@ type GraphQLBoolean<T> =
 type GraphQLObject<T> = T extends GraphQLObjectType ? (T extends GraphQLNonNull<GraphQLObjectType> ? T : T | null) : never;
 
 export type DTO<Field extends Fields> = {
-    [key in keyof Field]: GraphQLString<Field[key]['type']> | GraphQLNumber<Field[key]['type']> | GraphQLBoolean<Field[key]['type']>;
+    [key in keyof Field]:
+        | GraphQLString<Field[key]['type']>
+        | GraphQLNumber<Field[key]['type']>
+        | GraphQLBoolean<Field[key]['type']>
+        | GraphQLObject<Field[key]['type']>;
 };
 
 export type GraphQLMaybeScalar = GraphQLNonNull<any> | GraphQLObject<any> | GraphQLInputType;

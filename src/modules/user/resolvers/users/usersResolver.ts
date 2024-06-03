@@ -1,12 +1,12 @@
 import {DTO, Resolver} from '../../../../core/resolver';
 import {Context} from '../../../shared/domain/context';
-import {usersInputFields, usersOutputFields} from "./usersFields";
+import {usersInputFields, usersOutputFields} from './usersFields';
 
 export class UsersResolver extends Resolver<typeof usersInputFields, typeof usersOutputFields> {
     constructor() {
         super({
             name: 'users',
-            description: 'Get a batch of users',
+            description: 'List users',
             route: 'query',
             fields: {
                 input: usersInputFields,
@@ -20,7 +20,12 @@ export class UsersResolver extends Resolver<typeof usersInputFields, typeof user
         console.log(context);
 
         return {
-            data: null,
+            data: [],
+            pagination: {
+                nextOffset: 0,
+                hasMore: false,
+                total: 0,
+            },
         };
     }
 }

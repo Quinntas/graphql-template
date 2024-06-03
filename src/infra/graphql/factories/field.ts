@@ -1,8 +1,8 @@
+import {GraphQLObjectType} from 'graphql';
+import {GraphQLInputObjectType} from 'graphql/type';
 import {Fields, GraphQLMaybeScalar} from '../../../core/resolver';
 import {newList, newNonNullList} from './list';
 import {newNonNull} from './nonNull';
-import {GraphQLInputObjectType} from "graphql/type";
-import {GraphQLObjectType} from "graphql";
 
 export function newField(type: GraphQLMaybeScalar) {
     return {
@@ -23,7 +23,7 @@ export function newOutputFields(name: string, description: string, fields: Field
         name,
         description,
         fields,
-    })
+    });
 }
 
 export function newFieldList(type: GraphQLMaybeScalar) {
