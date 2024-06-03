@@ -5,11 +5,12 @@
   "main": "index.js",
   "scripts": {
     "dev": "pnpm run schema:save && cross-env NODE_ENV=development tsx watch ./src/infra/index.ts",
-    "schema:save": "cross-env tsx src/infra/graphql/saveSchema.ts",
-    "build": "rimraf ./dist && tsc && pnpm run schema:save",
+    "schema:save": "rimraf ./schema.graphql && cross-env tsx src/infra/graphql/saveSchema.ts",
+    "build": "rimraf ./dist && tsc",
     "prepare": "husky",
     "format": "prettier . --write --ignore-unknown",
-    "start": "node dist/infra/index.js"
+    "start": "cross-env NODE_ENV=production node dist/infra/index.js",
+    "test": "echo \"Error: no test specified\" && exit 0"
   },
   "keywords": [],
   "author": "",
