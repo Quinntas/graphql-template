@@ -21,10 +21,16 @@ interface EnvVariables {
     NODE_ENV: string;
     PORT: number;
     DATABASE_URL: string;
+    PEPPER: string;
+    REDIS_URL: string;
+    JWT_SECRET: string;
 }
 
 export const env: EnvVariables = {
     NODE_ENV: getEnv('NODE_ENV', false, 'development'),
     PORT: parseInt(getEnv('PORT', false, '4001')),
     DATABASE_URL: getEnv('DATABASE_URL'),
+    REDIS_URL: getEnv('REDIS_URL'),
+    PEPPER: getEnv('PEPPER'),
+    JWT_SECRET: getEnv('JWT_SECRET'),
 };

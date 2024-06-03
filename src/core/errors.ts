@@ -11,3 +11,9 @@ export class HttpError extends Error {
 
 export const notFound = new HttpError(404, 'not found');
 export const internalServerError = new HttpError(500, 'internal server error');
+
+export class InternalServerError extends HttpError {
+    constructor(message: string, data?: object) {
+        super(500, message, data);
+    }
+}

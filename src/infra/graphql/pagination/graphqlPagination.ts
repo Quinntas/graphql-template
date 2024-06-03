@@ -1,7 +1,7 @@
+import {GraphQLBoolean} from 'graphql';
 import {GraphQLInt} from 'graphql/type';
 import {newEnumType} from '../factories/enum';
 import {newInputField, newNonNullField, newOutputFields} from '../factories/field';
-import {GraphQLBoolean} from "graphql";
 
 export enum PaginationOrderByEnum {
     ASC = 'ASC',
