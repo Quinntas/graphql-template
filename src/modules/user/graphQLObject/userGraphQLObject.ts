@@ -4,10 +4,12 @@ import {newNonNullField} from '../../../infra/graphql/factories/field';
 import {baseDomainGraphQLObject} from '../../shared/graphQLObject/baseDomainGraphQLObject';
 import {UserRolesEnum} from '../domain/user';
 
-export const userGraphQLRoleEnum = newEnumType('UserRolesEnum', UserRolesEnum);
+export const userGraphQLObjectName = 'User';
+
+export const userGraphQLRoleEnum = newEnumType(`${userGraphQLObjectName}RolesEnum`, UserRolesEnum);
 
 export const userGraphQLObject = new GraphQLObjectType({
-    name: 'User',
+    name: userGraphQLObjectName,
     description: 'User object',
     fields: {
         ...baseDomainGraphQLObject,

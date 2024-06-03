@@ -1,6 +1,8 @@
-import {GraphQLMaybeScalar} from '../../../core/resolver';
-import {newNonNullList} from './list';
+import {Fields, GraphQLMaybeScalar} from '../../../core/resolver';
+import {newList, newNonNullList} from './list';
 import {newNonNull} from './nonNull';
+import {GraphQLInputObjectType} from "graphql/type";
+import {GraphQLObjectType} from "graphql";
 
 export function newField(type: GraphQLMaybeScalar) {
     return {
@@ -8,8 +10,24 @@ export function newField(type: GraphQLMaybeScalar) {
     };
 }
 
+export function newInputField(name: string, description: string, fields: Fields) {
+    return new GraphQLInputObjectType({
+        name,
+        description,
+        fields,
+    });
+}
+
+export function newOutputFields(name: string, description: string, fields: Fields) {
+    return new GraphQLObjectType({
+        name,
+        description,
+        fields,
+    })
+}
+
 export function newFieldList(type: GraphQLMaybeScalar) {
-    return newField(newNonNullList(type));
+    return newField(newList(type));
 }
 
 export function newNonNullField(type: GraphQLMaybeScalar) {

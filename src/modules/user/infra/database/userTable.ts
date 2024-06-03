@@ -12,3 +12,4 @@ export const userTable = mysqlTable('Users', {
     createdAt: datetime('createdAt').notNull(),
     updatedAt: datetime('updatedAt').notNull(),
 });
+
