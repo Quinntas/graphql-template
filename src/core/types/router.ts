@@ -1,5 +1,6 @@
-import {ArrayOfResolvers} from '../resolver';
+import {Resolver} from '../resolver';
 
 export type Router = {
-    resolvers: ArrayOfResolvers;
-};
+    resolver: Resolver<any, any>;
+    middleware: any[];
+}[];

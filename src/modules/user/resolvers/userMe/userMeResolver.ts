@@ -15,12 +15,9 @@ export class UserMeResolver extends Resolver<typeof userMeInputFields, typeof us
         });
     }
 
-    async resolverFn(_: null, input: DTO<typeof userMeInputFields>, context: Context) {
-        console.log(input);
-        console.log(context);
-
+    async resolverFn(_: null, __: DTO<typeof userMeInputFields>, context: Context) {
         return {
-            data: null,
+            data: context.user,
         };
     }
 }

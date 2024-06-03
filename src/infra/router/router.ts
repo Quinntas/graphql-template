@@ -1,23 +1,23 @@
-import {ArrayOfResolvers} from '../../core/resolver';
+import {Router} from '../../core/types/router';
 import {userRouter} from '../../modules/user/infra/router/userRouter';
 import {forEach} from '../../utils/iterators';
 
 export namespace MainRouter {
-    const routes: ArrayOfResolvers = [...userRouter.resolvers];
+    const routes: Router = [...userRouter];
 
     let queries = {};
     let mutations = {};
 
     forEach(routes, (value) => {
-        switch (value.getRoute()) {
+        switch (value.resolver.getRoute()) {
             case 'mutation':
                 Object.assign(mutations, {
-                    ...value.getType(),
+                    ...value.resolver.getType(),
                 });
                 break;
             case 'query':
                 Object.assign(queries, {
-                    ...value.getType(),
+                    ...value.resolver.getType(),
                 });
                 break;
         }

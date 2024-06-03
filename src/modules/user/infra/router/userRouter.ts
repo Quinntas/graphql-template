@@ -5,6 +5,25 @@ import {userMeResolver} from '../../resolvers/userMe';
 import {userUpdateResolver} from '../../resolvers/userUpdate';
 import {usersResolver} from '../../resolvers/users';
 
-export const userRouter: Router = {
-    resolvers: [userLoginResolver, userMeResolver, userCreateResolver, userUpdateResolver, usersResolver],
-};
+export const userRouter: Router = [
+    {
+        resolver: userLoginResolver,
+        middleware: [],
+    },
+    {
+        resolver: userMeResolver,
+        middleware: [],
+    },
+    {
+        resolver: userCreateResolver,
+        middleware: [],
+    },
+    {
+        resolver: userUpdateResolver,
+        middleware: [],
+    },
+    {
+        resolver: usersResolver,
+        middleware: [],
+    },
+];
