@@ -8,13 +8,15 @@ export class UserLoginResolver extends Resolver<typeof userLoginInputFields, typ
             name: 'userLogin',
             description: 'Login a user',
             route: 'mutation',
-            inputFields: userLoginInputFields,
-            outputFields: userLoginOutputFields,
+            fields: {
+                input: userLoginInputFields,
+                output: userLoginOutputFields,
+            },
         });
     }
 
     async resolverFn(_: null, input: DTO<typeof userLoginInputFields>, context: Context) {
-        console.log(input);
+        console.log(input.email);
         console.log(context);
 
         return {

@@ -12,7 +12,7 @@ Should you use this ? idk
  *                              This function accepts two parameters: the element value and the element index.
  * @returns {void}
  */
-export function forEach<TElement>(array: TElement[], callback: (value: TElement, index: number) => void) {
+export function forEach<TElement>(array: TElement[], callback: (value: TElement, index: number) => void): void {
     for (let i = 0; i < array.length; i++) {
         callback(array[i], i);
     }

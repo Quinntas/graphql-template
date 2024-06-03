@@ -1,6 +1,6 @@
 import {GraphQLMaybeScalar} from '../../../core/resolver';
+import {newNonNullList} from './list';
 import {newNonNull} from './nonNull';
-import {newNonNullList} from "./list";
 
 export function newField(type: GraphQLMaybeScalar) {
     return {

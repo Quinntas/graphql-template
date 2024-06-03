@@ -4,9 +4,10 @@ import {CompiledQuery} from 'graphql-jit/dist/execution';
 import {IncomingMessage, ServerResponse} from 'http';
 import {schema} from '../infra/graphql/schema';
 import {Context} from '../modules/shared/domain/context';
+import {UserRolesEnum} from '../modules/user/domain/user';
 import {HttpError, internalServerError, notFound} from './errors';
 import {jsonResponse} from './responses';
-import {DecodedRequest} from "./types/decodedRequest";
+import {DecodedRequest} from './types/decodedRequest';
 
 export function handleError(res: ServerResponse, error: Error) {
     switch (true) {
@@ -30,7 +31,7 @@ let cache: Cache = {};
 
 async function handleQuery(payload: string, req: DecodedRequest, res: ServerResponse) {
     if (payload.length === 0) throw new HttpError(400, 'no query provided');
-    
+
     const inp = JSON.parse(payload);
     const query = inp.query;
 
@@ -41,7 +42,17 @@ async function handleQuery(payload: string, req: DecodedRequest, res: ServerResp
     const result = await cache[query].query(
         {},
         {
-            bearer: req.bearer
+            user: {
+                id: 1,
+                pid: '1',
+                password: '',
+                email: '',
+                phone: '',
+                role: UserRolesEnum.ADMIN,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
+            bearer: req.bearer,
         } satisfies Context,
         inp.variables,
     );
@@ -57,18 +68,16 @@ function checkForValidEndpoint(url: string | undefined, endpoint: string) {
 function decodeRequest(req: IncomingMessage): DecodedRequest {
     const auth = req.headers.authorization;
 
-    if (!auth)
-        throw new HttpError(401, 'missing authorization header');
+    if (!auth) throw new HttpError(401, 'missing authorization header');
 
     const splitAuth = auth.split(' ');
 
-    if (splitAuth.length !== 2 || splitAuth[0] !== 'Bearer')
-        throw new HttpError(401, 'invalid authorization header');
+    if (splitAuth.length !== 2 || splitAuth[0] !== 'Bearer') throw new HttpError(401, 'invalid authorization header');
 
     return {
         ...req,
         bearer: splitAuth[1],
-    } as DecodedRequest
+    } as DecodedRequest;
 }
 
 export function httpHandler(req: IncomingMessage, res: ServerResponse) {

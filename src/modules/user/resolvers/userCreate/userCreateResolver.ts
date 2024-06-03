@@ -1,6 +1,6 @@
 import {DTO, Resolver} from '../../../../core/resolver';
 import {Context} from '../../../shared/domain/context';
-import {userCreateInputFields, userCreateOutputFields} from "./userCreateFields";
+import {userCreateInputFields, userCreateOutputFields} from './userCreateFields';
 
 export class UserCreateResolver extends Resolver<typeof userCreateInputFields, typeof userCreateOutputFields> {
     constructor() {
@@ -8,8 +8,10 @@ export class UserCreateResolver extends Resolver<typeof userCreateInputFields, t
             name: 'userCreate',
             description: 'Create a new user',
             route: 'mutation',
-            inputFields: userCreateInputFields,
-            outputFields: userCreateOutputFields,
+            fields: {
+                input: userCreateInputFields,
+                output: userCreateOutputFields,
+            },
         });
     }
 
@@ -18,9 +20,7 @@ export class UserCreateResolver extends Resolver<typeof userCreateInputFields, t
         console.log(context);
 
         return {
-            result: {
-                isSuccess: true,
-            },
+            isSuccessful: true,
         };
     }
 }

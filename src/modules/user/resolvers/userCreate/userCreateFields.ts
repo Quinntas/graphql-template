@@ -1,7 +1,6 @@
-import {newNonNullField} from "../../../../infra/graphql/factories/field";
-import {Fields} from "../../../../core/resolver";
-import {GraphQLString} from "graphql";
-import {entities} from "../../../../infra/database/drizzle";
+import {GraphQLBoolean, GraphQLString} from 'graphql';
+import {Fields} from '../../../../core/resolver';
+import {newNonNullField} from '../../../../infra/graphql/factories/field';
 
 export const userCreateInputFields: Fields = {
     email: newNonNullField(GraphQLString),
@@ -10,5 +9,5 @@ export const userCreateInputFields: Fields = {
 };
 
 export const userCreateOutputFields = {
-    result: newNonNullField(entities.types.MutationReturn),
+    isSuccessful: newNonNullField(GraphQLBoolean),
 };

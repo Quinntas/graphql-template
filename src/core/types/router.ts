@@ -1,3 +1,5 @@
-import {Resolver} from '../resolver';
+import {ArrayOfResolvers} from '../resolver';
 
-export type Router = Resolver<any, any>[];
+export type Router = {
+    resolvers: ArrayOfResolvers;
+};

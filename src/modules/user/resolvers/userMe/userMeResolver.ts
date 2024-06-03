@@ -6,10 +6,12 @@ export class UserMeResolver extends Resolver<typeof userMeInputFields, typeof us
     constructor() {
         super({
             name: 'userMe',
-            description: 'Get the current user',
+            description: 'Get the current logged in user',
             route: 'query',
-            inputFields: userMeInputFields,
-            outputFields: userMeOutputFields,
+            fields: {
+                input: userMeInputFields,
+                output: userMeOutputFields,
+            },
         });
     }
 

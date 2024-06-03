@@ -1,9 +1,9 @@
-import {Router} from '../../core/types/router';
+import {ArrayOfResolvers} from '../../core/resolver';
 import {userRouter} from '../../modules/user/infra/router/userRouter';
 import {forEach} from '../../utils/iterators';
 
 export namespace MainRouter {
-    const routes: Router = [...userRouter];
+    const routes: ArrayOfResolvers = [...userRouter.resolvers];
 
     let queries = {};
     let mutations = {};
