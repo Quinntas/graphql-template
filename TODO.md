@@ -1,0 +1,2 @@
+- [ ] (Bug) Save schema not ending because some connections are still on
+- [ ] (Feat) User authentication and authorization (RBAC)

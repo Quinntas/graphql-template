@@ -21,6 +21,7 @@ export function handleError(res: ServerResponse, error: Error) {
     }
 }
 
+// TODO move this to redis
 interface Cache {
     [key: string]: CompiledQuery<any, any>;
 }
@@ -37,13 +38,7 @@ async function handleQuery(payload: string, req: DecodedRequest, res: ServerResp
 
     if (!isCompiledQuery(cache[query])) throw new HttpError(400, "query couldn't be compiled");
 
-    const result = await cache[query].query(
-        {},
-        {
-            bearer: req.bearer,
-        },
-        inp.variables,
-    );
+    const result = await cache[query].query({}, req, inp.variables);
 
     return jsonResponse(res, 200, result);
 }
@@ -54,17 +49,9 @@ function checkForValidEndpoint(url: string | undefined, endpoint: string) {
 }
 
 function decodeRequest(req: IncomingMessage): DecodedRequest {
-    const auth = req.headers.authorization;
-
-    if (!auth) throw new HttpError(401, 'missing authorization header');
-
-    const splitAuth = auth.split(' ');
-
-    if (splitAuth.length !== 2 || splitAuth[0] !== 'Bearer') throw new HttpError(401, 'invalid authorization header');
-
     return {
         ...req,
-        bearer: splitAuth[1],
+        authorization: req.headers.authorization || '',
     } as DecodedRequest;
 }
 

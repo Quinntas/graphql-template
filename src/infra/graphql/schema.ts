@@ -1,5 +1,5 @@
 import {GraphQLObjectType, GraphQLSchema} from 'graphql';
-import {MainRouter} from '../router/router';
+import {MainRouter} from '../router/mainRouter';
 
 // TODO: when develop create schema, when prod use the schema.graphql file
 

@@ -1,5 +1,4 @@
 import {DTO, Resolver} from '../../../../core/resolver';
-import {Context} from '../../../shared/domain/context';
 import {userUpdateInputFields, userUpdateOutputFields} from './userUpdateFields';
 
 export class UserUpdateResolver extends Resolver<typeof userUpdateInputFields, typeof userUpdateOutputFields> {
@@ -15,9 +14,8 @@ export class UserUpdateResolver extends Resolver<typeof userUpdateInputFields, t
         });
     }
 
-    async resolverFn(_: null, input: DTO<typeof userUpdateInputFields>, context: Context) {
+    async resolverFn(_: null, input: DTO<typeof userUpdateInputFields>) {
         console.log(input);
-        console.log(context);
 
         return {
             isSuccessful: true,

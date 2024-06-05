@@ -12,12 +12,12 @@ export namespace MainRouter {
         switch (value.resolver.getRoute()) {
             case 'mutation':
                 Object.assign(mutations, {
-                    ...value.resolver.getType(),
+                    ...value.resolver.getType(value.middleware),
                 });
                 break;
             case 'query':
                 Object.assign(queries, {
-                    ...value.resolver.getType(),
+                    ...value.resolver.getType(value.middleware),
                 });
                 break;
         }

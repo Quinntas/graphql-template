@@ -1,5 +1,5 @@
 import {DTO, Resolver} from '../../../../core/resolver';
-import {Context} from '../../../shared/domain/context';
+import {UserContext} from '../../infra/context/userContext';
 import {userMeInputFields, userMeOutputFields} from './userMeFields';
 
 export class UserMeResolver extends Resolver<typeof userMeInputFields, typeof userMeOutputFields> {
@@ -15,7 +15,7 @@ export class UserMeResolver extends Resolver<typeof userMeInputFields, typeof us
         });
     }
 
-    async resolverFn(_: null, __: DTO<typeof userMeInputFields>, context: Context) {
+    async resolverFn(_: null, __: DTO<typeof userMeInputFields>, context: UserContext) {
         return {
             data: context.user,
         };

@@ -1,6 +1,3 @@
-import {User} from '../../user/domain/user';
+import {DecodedRequest} from '../../../core/types/decodedRequest';
 
-export interface Context {
-    bearer: string;
-    user: User;
-}
+export interface Context extends DecodedRequest {}

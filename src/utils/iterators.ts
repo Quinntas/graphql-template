@@ -18,6 +18,12 @@ export function forEach<TElement>(array: TElement[], callback: (value: TElement,
     }
 }
 
+export function forEachReverse<TElement>(array: TElement[], callback: (value: TElement, index: number) => void): void {
+    for (let i = array.length - 1; i >= 0; i--) {
+        callback(array[i], i);
+    }
+}
+
 /**
  * Applies a mapping function to each element in an array and returns a new array with the results.
  *

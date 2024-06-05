@@ -10,6 +10,7 @@ import {
 } from 'graphql';
 import {GraphQLScalarType} from 'graphql/type';
 import {Context} from '../modules/shared/domain/context';
+import {MiddlewareFn} from './types/middleware';
 
 export type ArrayOfResolvers = Resolver<any, any>[];
 
@@ -50,12 +51,13 @@ export interface ResolverConfig {
 }
 
 export abstract class Resolver<Input extends Fields, Output extends Fields> {
-    private readonly type: ThunkObjMap<GraphQLFieldConfig<any, any>>;
     private readonly output: GraphQLOutputType;
     private readonly input: GraphQLMaybeScalar | null;
 
     private readonly typeName: string;
     private readonly outputName: string;
+
+    private readonly description: string;
 
     private readonly route: GraphQLRoute;
 
@@ -63,8 +65,28 @@ export abstract class Resolver<Input extends Fields, Output extends Fields> {
         return this.route;
     }
 
-    getType() {
-        return this.type;
+    getType(middlewares: MiddlewareFn<Input>[]) {
+        return {
+            [this.typeName]: {
+                type: this.output,
+                description: this.description,
+                args: this.input,
+                resolve: (root: null, args: DTO<Input>, context: Context, resolveInfo: GraphQLResolveInfo) => {
+                    const resolverFn = this.resolverFn;
+
+                    if (middlewares && middlewares.length === 0) return resolverFn(root, args, context, resolveInfo);
+
+                    function next(index: number, root: null, args: DTO<Input>, context: Context, resolveInfo: GraphQLResolveInfo): Promise<DTO<Output>> | void {
+                        if (index === middlewares.length) return resolverFn(root, args, context, resolveInfo);
+                        return middlewares[index](root, args, context, resolveInfo, (sRoot, sArgs, sContext, sResolveInfo) => {
+                            return next(index + 1, sRoot ?? root, sArgs ?? args, sContext ?? context, sResolveInfo ?? resolveInfo);
+                        });
+                    }
+
+                    return next(0, root, args, context, resolveInfo);
+                },
+            },
+        };
     }
 
     protected constructor(config: ResolverConfig) {
@@ -80,16 +102,7 @@ export abstract class Resolver<Input extends Fields, Output extends Fields> {
             fields: config.fields.output,
         });
 
-        this.type = {
-            [this.typeName]: {
-                type: this.output,
-                description: config.description,
-                args: this.input,
-                resolve: (root: null, args: DTO<Input>, context: Context, resolveInfo: GraphQLResolveInfo) => {
-                    return this.resolverFn(root, args, context, resolveInfo);
-                },
-            },
-        };
+        this.description = config.description;
     }
 
     protected abstract resolverFn(root: null, input: DTO<Input>, context: Context, resolveInfo?: GraphQLResolveInfo): Promise<DTO<Output>>;

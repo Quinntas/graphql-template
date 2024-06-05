@@ -1,5 +1,5 @@
 import {DTO, Resolver} from '../../../../core/resolver';
-import {Context} from '../../../shared/domain/context';
+import {UserContext} from '../../infra/context/userContext';
 import {usersInputFields, usersOutputFields} from './usersFields';
 
 export class UsersResolver extends Resolver<typeof usersInputFields, typeof usersOutputFields> {
@@ -15,9 +15,9 @@ export class UsersResolver extends Resolver<typeof usersInputFields, typeof user
         });
     }
 
-    async resolverFn(_: null, input: DTO<typeof usersInputFields>, context: Context): Promise<DTO<typeof usersOutputFields>> {
-        console.log(input);
+    async resolverFn(_: null, args: DTO<typeof usersInputFields>, context: UserContext): Promise<DTO<typeof usersOutputFields>> {
         console.log(context);
+        console.log(args);
 
         return {
             data: [],
