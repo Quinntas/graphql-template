@@ -78,7 +78,7 @@ export abstract class Resolver<Input extends Fields, Output extends Fields> {
 
                     function next(index: number, root: null, args: DTO<Input>, context: Context, resolveInfo: GraphQLResolveInfo): Promise<DTO<Output>> | void {
                         if (index === middlewares.length) return resolverFn(root, args, context, resolveInfo);
-                        return middlewares[index](root, args, context, resolveInfo, (sRoot, sArgs, sContext, sResolveInfo) => {
+                        return middlewares[index](root, args as any, context, resolveInfo, (sRoot, sArgs, sContext, sResolveInfo) => {
                             return next(index + 1, sRoot ?? root, sArgs ?? args, sContext ?? context, sResolveInfo ?? resolveInfo);
                         });
                     }

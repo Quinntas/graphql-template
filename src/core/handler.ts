@@ -3,6 +3,7 @@ import {compileQuery, isCompiledQuery} from 'graphql-jit';
 import {CompiledQuery} from 'graphql-jit/dist/execution';
 import {IncomingMessage, ServerResponse} from 'http';
 import {schema} from '../infra/graphql/schema';
+import {Context} from '../modules/shared/domain/context';
 import {HttpError, internalServerError, notFound} from './errors';
 import {jsonResponse} from './responses';
 import {DecodedRequest} from './types/decodedRequest';
@@ -38,7 +39,13 @@ async function handleQuery(payload: string, req: DecodedRequest, res: ServerResp
 
     if (!isCompiledQuery(cache[query])) throw new HttpError(400, "query couldn't be compiled");
 
-    const result = await cache[query].query({}, req, inp.variables);
+    const result = await cache[query].query(
+        {},
+        {
+            decodedRequest: req,
+        } satisfies Context,
+        inp.variables,
+    );
 
     return jsonResponse(res, 200, result);
 }

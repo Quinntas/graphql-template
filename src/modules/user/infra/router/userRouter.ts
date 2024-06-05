@@ -4,6 +4,7 @@ import {userLoginResolver} from '../../resolvers/userLogin';
 import {userMeResolver} from '../../resolvers/userMe';
 import {userUpdateResolver} from '../../resolvers/userUpdate';
 import {usersResolver} from '../../resolvers/users';
+import {ensureAuthenticated} from '../middleware/ensureAuthenticated';
 
 export const userRouter: Router = [
     {
@@ -12,7 +13,7 @@ export const userRouter: Router = [
     },
     {
         resolver: userMeResolver,
-        middleware: [],
+        middleware: [ensureAuthenticated],
     },
     {
         resolver: userCreateResolver,
@@ -20,10 +21,10 @@ export const userRouter: Router = [
     },
     {
         resolver: userUpdateResolver,
-        middleware: [],
+        middleware: [ensureAuthenticated],
     },
     {
         resolver: usersResolver,
-        middleware: [],
+        middleware: [ensureAuthenticated],
     },
 ];
